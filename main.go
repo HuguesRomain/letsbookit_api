@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/HuguesRomain/letsbookit_api/handlers"
 	"github.com/HuguesRomain/letsbookit_api/models"
+	"github.com/HuguesRomain/letsbookit_api/routes"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/jinzhu/gorm"
@@ -40,14 +40,12 @@ func main() {
 	defer db.Close()
 
 	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.Shop{})
 
 	app := fiber.New()
 
-	userHandler := handlers.NewUserHandler(db)
-
-
-	app.Post("/register", userHandler.Register)
-	app.Post("/login", userHandler.Login)
+	routes.UserRoutes(app, db)
+	routes.ShopRoutes(app, db)
 
 	log.Fatal(app.Listen(":3000"))
 }

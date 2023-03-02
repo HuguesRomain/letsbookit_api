@@ -1,0 +1,15 @@
+# .air.toml
+
+[build]
+# ne pas inclure les fichiers dont l'extension est .test ou .tmp
+exclude = ["*_test.go", "*.tmp"]
+
+[run]
+# la commande pour exécuter votre programme
+cmd = "go run main.go"
+
+[monitor]
+# surveiller les fichiers avec ces extensions pour les modifications
+extensions = ["go", "html", "yaml"]
+# ne pas inclure les fichiers dont le nom contient ces chaînes de caractères
+exclude_dirs = ["vendor", "node_modules", ".git"]
