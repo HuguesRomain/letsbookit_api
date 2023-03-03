@@ -9,6 +9,7 @@ import (
 	"github.com/HuguesRomain/letsbookit_api/routes"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
@@ -43,6 +44,7 @@ func main() {
 	db.AutoMigrate(&models.Shop{})
 
 	app := fiber.New()
+	app.Use(cors.New())
 
 	routes.UserRoutes(app, db)
 	routes.ShopRoutes(app, db)

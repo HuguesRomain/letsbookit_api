@@ -51,11 +51,7 @@ func (h *shopHandler) Create(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"message": "Failed to create shop"})
 	}
 
-	if err := h.db.Model(&shop).Preload("User").First(&shop).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"message": "Failed to load shop owner"})
-	}
-
-	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"message": "Shop created successfully", "shop": shop})
+	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"message": "Shop created successfully"})
 }
 
 func (h *shopHandler) Get(c *fiber.Ctx) error {
